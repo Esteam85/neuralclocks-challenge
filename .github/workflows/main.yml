@@ -27,7 +27,7 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Run Jest tests
-        run: npm test
+        run: test:ci
 
   build-and-deploy:
     runs-on: ubuntu-latest
