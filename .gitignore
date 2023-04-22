@@ -1,0 +1,21 @@
+.idea
+# Next.js build output
+.next/
+
+# Dependencias
+node_modules/
+
+# Archivos de configuración
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.env.local
+.env.build
+.env
+
+# Otros archivos y directorios
+.DS_Store
+*.log
+*.bak
+*.swp
+Thumbs.db

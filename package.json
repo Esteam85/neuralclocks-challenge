@@ -1,0 +1,25 @@
+{
+  "name": "neuralclocks-challenge",
+  "version": "1.0.0",
+  "description": "Pomodoro solution for NeuralWorkers",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Esteam85/neuralclocks-challenge.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Esteam85/neuralclocks-challenge/issues"
+  },
+  "homepage": "https://github.com/Esteam85/neuralclocks-challenge#readme",
+  "dependencies": {
+    "next": "^13.3.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
+}
