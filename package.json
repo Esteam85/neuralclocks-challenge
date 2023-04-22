@@ -1,32 +1,25 @@
 {
   "name": "neuralclocks-challenge",
-  "version": "1.0.0",
-  "description": "Pomodoro solution for NeuralWorkers",
-  "main": "index.js",
+  "version": "0.1.0",
+  "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "lint": "next lint"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Esteam85/neuralclocks-challenge.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Esteam85/neuralclocks-challenge/issues"
-  },
-  "homepage": "https://github.com/Esteam85/neuralclocks-challenge#readme",
   "dependencies": {
-    "next": "^13.3.1",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
-  },
-  "devDependencies": {
-    "@types/node": "^18.15.13",
-    "@types/react": "^18.0.38",
-    "typescript": "^5.0.4"
+    "@types/node": "18.15.13",
+    "@types/react": "18.0.38",
+    "@types/react-dom": "18.0.11",
+    "autoprefixer": "10.4.14",
+    "eslint": "8.39.0",
+    "eslint-config-next": "13.3.1",
+    "next": "13.3.1",
+    "postcss": "8.4.23",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "tailwindcss": "3.3.1",
+    "typescript": "5.0.4"
   }
 }
