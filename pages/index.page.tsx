@@ -13,6 +13,7 @@ const Home = () => {
     return (
         <div className={styles.home}>
             <div>
+            <h1>Welcome to Pomodoro!</h1>
                 <ProgressBar totalTime={context.workMinutes}/>
                 <div><PlayButton/><PauseButton/></div>
                 <div>
