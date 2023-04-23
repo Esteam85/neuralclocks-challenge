@@ -26,7 +26,6 @@
     "typescript": "5.0.4"
   },
   "devDependencies": {
-    "@jest/types": "^29.5.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
     "husky": "^8.0.3",
