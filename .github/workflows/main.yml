@@ -45,6 +45,6 @@ jobs:
       - name: Deploy to Vercel
         uses: amondnet/vercel-action@v25.1.1
         with:
-          vercel-token: ${{ secrets.VERCEL }}
-          vercel-org-id: esteam
+          vercel-token: ${{ secrets.VERCEL_SECRET }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
           vercel-project-id: neuralclocks-challenge
