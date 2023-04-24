@@ -1,5 +1,7 @@
 import styles from "./playbutton.module.scss"
-function PlayButton() {
-    return (<button className={styles.playbutton}>Play</button>) ;
+import {FC} from "react";
+
+const PlayButton: FC<ButtonProps> = (props) => {
+    return (<button {...props} className={styles.playbutton}>Play</button>);
 }
 export default PlayButton

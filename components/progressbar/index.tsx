@@ -1,16 +1,19 @@
 import {FC} from 'react'
-import styles from "./circular-progress-bar.module.scss";
-import {CircularProgressbar} from 'react-circular-progressbar';
+import {buildStyles, CircularProgressbar} from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 
 interface ProgressBarProps {
     totalTime: number;
+    text: string;
+    styles: { pathColor: string }
 }
 
-const ProgressBar: FC<ProgressBarProps> = ({totalTime}) => {
+const ProgressBar: FC<ProgressBarProps> = ({totalTime, text, styles}) => {
     return (
-        <div className={styles.progressBar}>
-            <CircularProgressbar value={totalTime} text={totalTime+""}/>
+        <div>
+            <CircularProgressbar styles={buildStyles({
+                ...styles
+            })} value={totalTime} text={text}/>
         </div>
     );
 };
