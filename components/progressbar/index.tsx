@@ -12,6 +12,7 @@ const ProgressBar: FC<ProgressBarProps> = ({totalTime, text, styles}) => {
     return (
         <div>
             <CircularProgressbar styles={buildStyles({
+                textColor:"#000",
                 ...styles
             })} value={totalTime} text={text}/>
         </div>

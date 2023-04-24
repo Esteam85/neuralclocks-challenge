@@ -1,4 +1,5 @@
 import styles from "./home.module.scss"
+import Head from 'next/head';
 import ProgressBar from "components/progressbar";
 import PlayButton from "components/playbutton";
 import PauseButton from "components/pausebutton";
@@ -71,26 +72,32 @@ const Home = () => {
     const minutes = Math.floor(secondsLeft / MINUTE_IN_SECONDS)
     let seconds = (secondsLeft % MINUTE_IN_SECONDS).toString()
     if (parseInt(seconds) < 10) seconds = "0" + seconds
+    const text = `${minutes}:${seconds}`
     return (
         <div className={styles.home}>
+            <Head>
+                <title>{mode === ModeType.Working ? '👨‍💻' : '💆'}{text}</title>
+            </Head>
             <div>
                 <h1>Welcome to Super Pomodoro!</h1>
-                <ProgressBar styles={{pathColor: mode === ModeType.Working ? red : green}} totalTime={percentage}
-                             text={`${minutes}:${seconds}`}/>
-                <div>{isPause ? <PlayButton onClick={() => {
-                    setIsPause(false)
-                    isPauseRef.current = false
-                }}/> : <PauseButton onClick={() => {
-                    setIsPause(true)
-                    isPauseRef.current = true
-                }}/>}</div>
-                <div>
-                    {context.workMinutes}
+                <div className={styles.timmer}>
+                    <ProgressBar styles={{pathColor: mode === ModeType.Working ? red : green}} totalTime={percentage}
+                                 text={text}/>
+                    <div>{isPause ? <PlayButton onClick={() => {
+                        setIsPause(false)
+                        isPauseRef.current = false
+                    }}/> : <PauseButton onClick={() => {
+                        setIsPause(true)
+                        isPauseRef.current = true
+                    }}/>}</div>
                     <div>
-                        <SettingsButton onClick={() => {
-                            setSettings(!settings)
-                        }}/>
-                        {settings && <Settings/>}
+                        {context.workMinutes}
+                        <div>
+                            <SettingsButton onClick={() => {
+                                setSettings(!settings)
+                            }}/>
+                            {settings && <Settings/>}
+                        </div>
                     </div>
                 </div>
             </div>
