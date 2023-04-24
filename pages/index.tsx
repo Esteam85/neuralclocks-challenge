@@ -18,7 +18,7 @@ enum ModeType {
 }
 
 const Home = () => {
-    const [settings, setSettings] = useState(true)
+    const [settings, setSettings] = useState(false)
     const [isPause, setIsPause] = useState(true)
     const [secondsLeft, setSecondsLeft] = useState(0)
     const [mode, setMode] = useState<number>(ModeType.Working)
@@ -76,28 +76,32 @@ const Home = () => {
     return (
         <div className={styles.home}>
             <Head>
-                <title>{isPause?'⏸️':''}{mode === ModeType.Working ? '👨‍💻' : '💆'}{text}</title>
+                <title>{isPause ? '⏸️' : ''}{mode === ModeType.Working ? '👨‍💻' : '💆'}{text}</title>
             </Head>
             <div>
                 <h1>Welcome to Super Pomodoro!</h1>
-                <div className={styles.timmer}>
-                    <ProgressBar styles={{pathColor: mode === ModeType.Working ? workingColor : breakColor}} totalTime={percentage}
+                <div className={styles.timer}>
+                    <ProgressBar styles={{pathColor: mode === ModeType.Working ? workingColor : breakColor}}
+                                 totalTime={percentage}
                                  text={text}/>
-                    <div>{isPause ? <PlayButton onClick={() => {
-                        setIsPause(false)
-                        isPauseRef.current = false
-                    }}/> : <PauseButton onClick={() => {
-                        setIsPause(true)
-                        isPauseRef.current = true
-                    }}/>}</div>
+                    <div className={styles.buttons}>
+                        {
+                            isPause
+                                ? <PlayButton onClick={() => {
+                                    setIsPause(false)
+                                    isPauseRef.current = false
+                                }}/>
+                                : <PauseButton onClick={() => {
+                                    setIsPause(true)
+                                    isPauseRef.current = true
+                                }}/>
+                        }
+                        <SettingsButton onClick={() => {
+                            setSettings(!settings)
+                        }}/>
+                    </div>
                     <div>
-                        {context.workMinutes}
-                        <div>
-                            <SettingsButton onClick={() => {
-                                setSettings(!settings)
-                            }}/>
-                            {settings && <Settings/>}
-                        </div>
+                        {settings && <Settings/>}
                     </div>
                 </div>
             </div>

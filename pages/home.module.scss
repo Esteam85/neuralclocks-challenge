@@ -11,8 +11,25 @@
     color: #000;
 }
 
-.home .timmer {
-    background-color: rgb(245,245,247);
-    padding: 3rem;
-    border-radius: 1.5rem;
+.home {
+    .timer {
+        background-color: rgb(245,245,247);
+        padding: 3rem;
+        border-radius: 1.5rem;
+
+        .buttons{
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        button {
+            font-size: 3em;
+            background-color: transparent;
+            color: rgb(255,255,255,0.8);
+            border: 0;
+            display: inline-block;
+            width: 100px;
+            cursor: pointer;
+        }
+    }
 }

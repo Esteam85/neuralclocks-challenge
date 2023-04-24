@@ -5,4 +5,7 @@ Welcome to the Super Pomodoro!
 - 404 page
 - Save configs
 - Persist Pomodoro after refresh
-- press space to pause/play
+- Press space to pause/play
+- Use a server-side ticker because when the user's computer goes to sleep, the browser pauses the interval
+- Responsive design view
+- Double tap to Pause/Play for mobile 
