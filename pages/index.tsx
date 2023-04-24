@@ -76,7 +76,7 @@ const Home = () => {
     return (
         <div className={styles.home}>
             <Head>
-                <title>{mode === ModeType.Working ? '👨‍💻' : '💆'}{text}</title>
+                <title>{isPause?'⏸️':''}{mode === ModeType.Working ? '👨‍💻' : '💆'}{text}</title>
             </Head>
             <div>
                 <h1>Welcome to Super Pomodoro!</h1>
