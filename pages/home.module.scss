@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 .home {
-    height: 100vh;
+    margin-top: 4rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -19,16 +19,16 @@
 
         .buttons{
             margin-top: 20px;
-            text-align: center;
+            display: flex;
+            justify-content: space-evenly;
         }
 
         button {
-            font-size: 3em;
+            font-size: 3rem;
             background-color: transparent;
             color: rgb(255,255,255,0.8);
             border: 0;
             display: inline-block;
-            width: 100px;
             cursor: pointer;
         }
     }
