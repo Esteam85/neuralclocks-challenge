@@ -9,8 +9,8 @@ import SettingsButton from "components/settingsbutton";
 import {PomodoroContext} from "context/state";
 
 const MINUTE_IN_SECONDS = 60
-const red = '#f54e4e';
-const green = '#4aec8c';
+const workingColor = 'rgb(234,51,104)';
+const breakColor = '#4aec8c';
 
 enum ModeType {
     Working = 1,
@@ -81,7 +81,7 @@ const Home = () => {
             <div>
                 <h1>Welcome to Super Pomodoro!</h1>
                 <div className={styles.timmer}>
-                    <ProgressBar styles={{pathColor: mode === ModeType.Working ? red : green}} totalTime={percentage}
+                    <ProgressBar styles={{pathColor: mode === ModeType.Working ? workingColor : breakColor}} totalTime={percentage}
                                  text={text}/>
                     <div>{isPause ? <PlayButton onClick={() => {
                         setIsPause(false)
