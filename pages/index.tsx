@@ -32,27 +32,23 @@ const Home = () => {
     }
 
 
-    function switchMode() {
-        const nextMode = modeRef.current === ModeType.Working ? ModeType.Break: ModeType.Working
-        const nextSeconds = (nextMode === ModeType.Working ? context.workMinutes : context.breakMinutes) * MINUTE_IN_SECONDS
-        setMode(nextMode)
-        modeRef.current = nextMode
-        setSecondsLeft(nextSeconds)
-        secondsLeftRef.current = nextSeconds
-    }
-
     function tick() {
         secondsLeftRef.current--
         setSecondsLeft(secondsLeftRef.current)
     }
 
-    function initPomodoro() {
-        secondsLeftRef.current = context.workMinutes * 60;
-        setSecondsLeft(secondsLeftRef.current);
-    }
-
     useEffect(() => {
-        initPomodoro();
+        function switchMode() {
+            const nextMode = modeRef.current === ModeType.Working ? ModeType.Break : ModeType.Working
+            const nextSeconds = (nextMode === ModeType.Working ? context.workMinutes : context.breakMinutes) * MINUTE_IN_SECONDS
+            setMode(nextMode)
+            modeRef.current = nextMode
+            setSecondsLeft(nextSeconds)
+            secondsLeftRef.current = nextSeconds
+        }
+
+        secondsLeftRef.current = context.workMinutes * MINUTE_IN_SECONDS;
+        setSecondsLeft(secondsLeftRef.current);
         const intervalID = setInterval(() => {
             if (isPauseRef.current) {
                 return;
@@ -66,7 +62,7 @@ const Home = () => {
         }, 1000)
         return () => clearInterval(intervalID)
 
-    }, [context])
+    }, [context,])
     const totalSeconds = mode === ModeType.Working
         ? context.workMinutes * MINUTE_IN_SECONDS
         : context.breakMinutes * MINUTE_IN_SECONDS
