@@ -5,4 +5,4 @@ Welcome to the Super Pomodoro!
 - 404 page
 - Save configs
 - Persist Pomodoro after refresh
-- tab with the timer
+- press space to pause/play
