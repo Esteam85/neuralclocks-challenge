@@ -1,12 +1,10 @@
 import styles from "./home.module.scss"
 import Head from 'next/head';
 import ProgressBar from "components/progressbar";
-import PlayButton from "components/playbutton";
-import PauseButton from "components/pausebutton";
 import Settings from "components/settings";
 import {useContext, useEffect, useRef, useState} from "react";
-import SettingsButton from "components/settingsbutton";
 import {PomodoroContext} from "context/state";
+import {PauseButton, PlayButton, SettingsButton} from "@/components/buttons";
 
 const MINUTE_IN_SECONDS = 60
 const workingColor = 'rgb(234,51,104)';
