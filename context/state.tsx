@@ -4,22 +4,33 @@ export enum ModeType {
     Working = 1,
     Break,
 }
+
+export const ModeMapEmoji: Record<ModeType, string> = {
+    [ModeType.Working]: "👨‍💻",
+    [ModeType.Break]: "💆"
+}
+
+export const ModeMap: Record<ModeType, string> = {
+    [ModeType.Working]: "👨‍💻Working",
+    [ModeType.Break]: "💆Short Break",
+}
+
 interface InitialStateType {
-    secondsLeft:number;
+    secondsLeft: number;
     breakMinutes: number;
     workMinutes: number;
     currentMode: ModeType,
-    fastModeOn:boolean,
-    ticksMilliseconds:number
+    fastModeOn: boolean,
+    ticksMilliseconds: number
 }
 
 const initialState = {
-    secondsLeft:25*60,
-    breakMinutes:5,
-    workMinutes:25,
-    currentMode:ModeType.Working,
-    fastModeOn:false,
-    ticksMilliseconds:1000
+    secondsLeft: 25 * 60,
+    breakMinutes: 5,
+    workMinutes: 25,
+    currentMode: ModeType.Working,
+    fastModeOn: false,
+    ticksMilliseconds: 1000
 
 }
 export const PomodoroContext = createContext<{
@@ -42,27 +53,27 @@ type PomodoroActions = {
     type: ActionType;
     payload?: any;
 }
-const reducer =  (state:InitialStateType, action:PomodoroActions):InitialStateType =>{
+const reducer = (state: InitialStateType, action: PomodoroActions): InitialStateType => {
     switch (action.type) {
         case ActionType.Tick: {
-            return {...state,secondsLeft:state.secondsLeft-1}
+            return {...state, secondsLeft: state.secondsLeft - 1}
         }
         case ActionType.NextMode: {
-            let secondsLeft=0;
-            let currentMode:ModeType = initialState.currentMode;
-            if (state.currentMode === ModeType.Break){
+            let secondsLeft = 0;
+            let currentMode: ModeType = initialState.currentMode;
+            if (state.currentMode === ModeType.Break) {
                 currentMode = ModeType.Working
                 secondsLeft = initialState.workMinutes * 60
             }
-            if (state.currentMode === ModeType.Working){
+            if (state.currentMode === ModeType.Working) {
                 currentMode = ModeType.Break
                 secondsLeft = initialState.breakMinutes * 60
             }
-            return {...state,secondsLeft,currentMode}
+            return {...state, secondsLeft, currentMode}
         }
         case ActionType.SetFastMode: {
-            const ticksMilliseconds = action.payload?10:initialState.ticksMilliseconds
-            return {...state,fastModeOn: action.payload as boolean, ticksMilliseconds}
+            const ticksMilliseconds = action.payload ? 10 : initialState.ticksMilliseconds
+            return {...state, fastModeOn: action.payload as boolean, ticksMilliseconds}
         }
         default: {
             throw new Error(`Unhandled action type: ${action.type}`)

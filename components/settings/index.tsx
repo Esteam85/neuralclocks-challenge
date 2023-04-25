@@ -36,7 +36,6 @@ const Settings: FC = () => {
                     (1 sec = 10 millisec)
                 </p>
                 <div className={styles.switch}>
-
                     <Switch
                         onHandleColor="#2693e6"
                         handleDiameter={30}

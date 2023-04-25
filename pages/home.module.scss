@@ -27,9 +27,15 @@
     text-align: center;
   }
 
+  h2{
+    margin-bottom: 1rem;
+    padding-top: 1rem;
+    text-align: center;
+  }
+
   .timer {
     background-color: rgb(245, 245, 247);
-    padding: 3rem;
+    padding: 0 3rem 3rem 3rem;
     border-radius: 1.5rem;
 
     .buttons {
