@@ -3,7 +3,7 @@ import Head from 'next/head';
 import ProgressBar from "components/progressbar";
 import Settings from "components/settings";
 import {useContext, useEffect, useRef, useState} from "react";
-import {PomodoroContext} from "context/state";
+import {ActionType, PomodoroContext} from "context/state";
 import {PauseButton, PlayButton, SettingsButton} from "@/components/buttons";
 
 
@@ -19,69 +19,53 @@ enum ModeType {
 const Home = () => {
     const [settings, setSettings] = useState(false)
     const [isPause, setIsPause] = useState(true)
-    const [secondsLeft, setSecondsLeft] = useState(0)
-    const [mode, setMode] = useState<number>(ModeType.Working)
-    const context = useContext(PomodoroContext)
+    const {state,dispatch} = useContext(PomodoroContext)
 
-    const secondsLeftRef = useRef(secondsLeft)
     const isPauseRef = useRef(isPause)
-    const modeRef = useRef(mode)
-
-    function initTimer() {
-        setSecondsLeft(context.workMinutes * MINUTE_IN_SECONDS)
-    }
-
-
     function tick() {
-        secondsLeftRef.current--
-        setSecondsLeft(secondsLeftRef.current)
+        dispatch({type:ActionType.Tick})
     }
 
     useEffect(() => {
         function switchMode() {
-            const nextMode = modeRef.current === ModeType.Working ? ModeType.Break : ModeType.Working
-            const nextSeconds = (nextMode === ModeType.Working ? context.workMinutes : context.breakMinutes) * MINUTE_IN_SECONDS
-            setMode(nextMode)
-            modeRef.current = nextMode
-            setSecondsLeft(nextSeconds)
-            secondsLeftRef.current = nextSeconds
+            const nextMode = state.mode === ModeType.Working ? ModeType.Break : ModeType.Working
+            const nextSeconds = (nextMode === ModeType.Working ? state.workMinutes : state.breakMinutes) * MINUTE_IN_SECONDS
+            dispatch({type:ActionType.NextMode,payload:nextMode})
         }
 
-        secondsLeftRef.current = context.workMinutes * MINUTE_IN_SECONDS;
-        setSecondsLeft(secondsLeftRef.current);
         const intervalID = setInterval(() => {
             if (isPauseRef.current) {
                 return;
             }
 
-            if (secondsLeftRef.current === 0) {
+            if (state.secondsLeft === 0) {
                 return switchMode()
             }
 
             tick()
-        }, 1000)
+        }, 10)
         return () => clearInterval(intervalID)
 
-    }, [context,])
+    }, [state])
 
-    const totalSeconds = mode === ModeType.Working
-        ? context.workMinutes * MINUTE_IN_SECONDS
-        : context.breakMinutes * MINUTE_IN_SECONDS
-    const percentage = Math.round(secondsLeft / totalSeconds * 100)
+    const totalSeconds = state.mode === ModeType.Working
+        ? state.workMinutes * MINUTE_IN_SECONDS
+        : state.breakMinutes * MINUTE_IN_SECONDS
+    const percentage = Math.round(state.secondsLeft / totalSeconds * 100)
 
-    const minutes = Math.floor(secondsLeft / MINUTE_IN_SECONDS)
-    let seconds = (secondsLeft % MINUTE_IN_SECONDS).toString()
+    const minutes = Math.floor(state.secondsLeft / MINUTE_IN_SECONDS)
+    let seconds = (state.secondsLeft % MINUTE_IN_SECONDS).toString()
     if (parseInt(seconds) < 10) seconds = "0" + seconds
     const text = `${minutes}:${seconds}`
     return (
         <div className={styles.home}>
             <Head>
-                <title>{isPause ? '⏸️' : ''}{mode === ModeType.Working ? '👨‍💻' : '💆'}{text}</title>
+                <title>{isPause ? '⏸️' : ''}{state.mode === ModeType.Working ? '👨‍💻' : '💆'}{text}</title>
             </Head>
             <div>
                 <h1>NeuralClocks <div className={styles.tomato}>🍅</div></h1>
                 <div className={styles.timer}>
-                    <ProgressBar styles={{pathColor: mode === ModeType.Working ? workingColor : breakColor}}
+                    <ProgressBar styles={{pathColor: state.mode === ModeType.Working ? workingColor : breakColor}}
                                  totalTime={percentage}
                                  text={text}/>
                     <div className={styles.buttons}>
