@@ -43,7 +43,7 @@ const Home = () => {
             }
 
             tick()
-        }, 10)
+        }, 1000)
         return () => clearInterval(intervalID)
 
     }, [state])
