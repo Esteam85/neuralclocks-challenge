@@ -1,5 +1,7 @@
 import React, {createContext, PropsWithChildren, useReducer, useState} from "react";
 
+export const MINUTE_IN_SECONDS = 60
+
 export enum ModeType {
     Working = 1,
     Break,
@@ -63,11 +65,11 @@ const reducer = (state: InitialStateType, action: PomodoroActions): InitialState
             let currentMode: ModeType = initialState.currentMode;
             if (state.currentMode === ModeType.Break) {
                 currentMode = ModeType.Working
-                secondsLeft = initialState.workMinutes * 60
+                secondsLeft = state.workMinutes * MINUTE_IN_SECONDS
             }
             if (state.currentMode === ModeType.Working) {
                 currentMode = ModeType.Break
-                secondsLeft = initialState.breakMinutes * 60
+                secondsLeft = state.breakMinutes * MINUTE_IN_SECONDS
             }
             return {...state, secondsLeft, currentMode}
         }
@@ -76,11 +78,14 @@ const reducer = (state: InitialStateType, action: PomodoroActions): InitialState
             return {...state, fastModeOn: action.payload as boolean, ticksMilliseconds}
         }
         case ActionType.SetBreakMinutes: {
-            const secondsLeft = action.payload * 60
+            let secondsLeft = state.secondsLeft
+            if (state.currentMode == ModeType.Break) secondsLeft = action.payload * MINUTE_IN_SECONDS
+
             return {...state, secondsLeft, breakMinutes: action.payload as number}
         }
         case ActionType.SetWorkMinutes: {
-            const secondsLeft = action.payload * 60
+            let secondsLeft = state.secondsLeft
+            if (state.currentMode == ModeType.Working) secondsLeft = action.payload * MINUTE_IN_SECONDS
             return {...state, secondsLeft, workMinutes: action.payload as number}
         }
         default: {

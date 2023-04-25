@@ -3,10 +3,9 @@ import Head from 'next/head';
 import ProgressBar from "components/progressbar";
 import Settings from "components/settings";
 import {FC, useContext, useEffect, useRef, useState} from "react";
-import {ModeMap, ModeType, ActionType, PomodoroContext, ModeMapEmoji} from "context/state";
+import {MINUTE_IN_SECONDS, ModeMap, ModeType, ActionType, PomodoroContext, ModeMapEmoji} from "context/state";
 import {PauseButton, PlayButton, SettingsButton} from "@/components/buttons";
 
-const MINUTE_IN_SECONDS = 60
 const workingColor = '#EA3368';
 const breakColor = '#4aec8c';
 
