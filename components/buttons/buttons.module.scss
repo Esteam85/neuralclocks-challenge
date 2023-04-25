@@ -1,0 +1,15 @@
+.playpause{
+  transition: transform 0.3s;
+}
+
+.playpause:hover{
+  transform: scale(1.1);
+}
+
+.settings{
+  transition: transform 0.3s;
+}
+
+.settings:hover{
+  transform: rotate(-25deg);
+}

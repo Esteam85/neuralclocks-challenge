@@ -1,35 +1,52 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
-.home {
-    margin-top: 4rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
 
-.home * {
+.home {
+  * {
     font-family: 'Roboto', sans-serif;
     color: #000;
-}
+  }
 
-.home {
-    .timer {
-        background-color: rgb(245,245,247);
-        padding: 3rem;
-        border-radius: 1.5rem;
+  .tomato {
+    cursor: default;
+    font-size: 1.8rem;
+    display: inline-block;
+    transition: transform 0.3s;
+  }
 
-        .buttons{
-            margin-top: 20px;
-            display: flex;
-            justify-content: space-evenly;
-        }
+  .tomato:hover {
+    transform: scale(1.4);
+  }
 
-        button {
-            font-size: 3rem;
-            background-color: transparent;
-            color: rgb(255,255,255,0.8);
-            border: 0;
-            display: inline-block;
-            cursor: pointer;
-        }
+
+  margin-top: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  h1 {
+    text-align: center;
+  }
+
+  .timer {
+    background-color: rgb(245, 245, 247);
+    padding: 3rem;
+    border-radius: 1.5rem;
+
+    .buttons {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-evenly;
     }
+
+    button {
+      font-size: 3rem;
+      background-color: transparent;
+      color: rgb(255, 255, 255, 0.8);
+      border: 0;
+      display: inline-block;
+      cursor: pointer;
+    }
+  }
+
+
 }

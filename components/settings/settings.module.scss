@@ -1,0 +1,15 @@
+.settings {
+  margin-top: 1rem;
+
+  div {
+    display: flex;
+    margin-bottom: 10px;
+    justify-content: space-evenly;
+  }
+
+
+  input {
+    border-radius: 0.5rem;
+    width:100px;
+  }
+}

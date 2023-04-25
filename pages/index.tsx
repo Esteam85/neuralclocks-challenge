@@ -6,6 +6,7 @@ import {useContext, useEffect, useRef, useState} from "react";
 import {PomodoroContext} from "context/state";
 import {PauseButton, PlayButton, SettingsButton} from "@/components/buttons";
 
+
 const MINUTE_IN_SECONDS = 60
 const workingColor = 'rgb(234,51,104)';
 const breakColor = '#4aec8c';
@@ -62,6 +63,7 @@ const Home = () => {
         return () => clearInterval(intervalID)
 
     }, [context,])
+
     const totalSeconds = mode === ModeType.Working
         ? context.workMinutes * MINUTE_IN_SECONDS
         : context.breakMinutes * MINUTE_IN_SECONDS
@@ -77,7 +79,7 @@ const Home = () => {
                 <title>{isPause ? '⏸️' : ''}{mode === ModeType.Working ? '👨‍💻' : '💆'}{text}</title>
             </Head>
             <div>
-                <h1>Welcome to Super Pomodoro!</h1>
+                <h1>NeuralClocks <div className={styles.tomato}>🍅</div></h1>
                 <div className={styles.timer}>
                     <ProgressBar styles={{pathColor: mode === ModeType.Working ? workingColor : breakColor}}
                                  totalTime={percentage}
