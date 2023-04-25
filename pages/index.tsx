@@ -2,53 +2,38 @@ import styles from "./home.module.scss"
 import Head from 'next/head';
 import ProgressBar from "components/progressbar";
 import Settings from "components/settings";
-import {useContext, useEffect, useRef, useState} from "react";
-import {ActionType, PomodoroContext} from "context/state";
+import {FC, useContext, useEffect, useRef, useState} from "react";
+import {ModeType, ActionType, PomodoroContext} from "context/state";
 import {PauseButton, PlayButton, SettingsButton} from "@/components/buttons";
 
-
 const MINUTE_IN_SECONDS = 60
-const workingColor = 'rgb(234,51,104)';
+const workingColor = '#EA3368';
 const breakColor = '#4aec8c';
 
-enum ModeType {
-    Working = 1,
-    Break,
-}
-
-const Home = () => {
+const Home: FC = () => {
+    const {state,dispatch} = useContext(PomodoroContext)
     const [settings, setSettings] = useState(false)
     const [isPause, setIsPause] = useState(true)
-    const {state,dispatch} = useContext(PomodoroContext)
 
     const isPauseRef = useRef(isPause)
-    function tick() {
-        dispatch({type:ActionType.Tick})
-    }
-
     useEffect(() => {
-        function switchMode() {
-            const nextMode = state.mode === ModeType.Working ? ModeType.Break : ModeType.Working
-            const nextSeconds = (nextMode === ModeType.Working ? state.workMinutes : state.breakMinutes) * MINUTE_IN_SECONDS
-            dispatch({type:ActionType.NextMode,payload:nextMode})
-        }
-
         const intervalID = setInterval(() => {
             if (isPauseRef.current) {
                 return;
             }
 
             if (state.secondsLeft === 0) {
-                return switchMode()
+                dispatch({type:ActionType.NextMode})
+                return
             }
 
-            tick()
-        }, 1000)
+            dispatch({type:ActionType.Tick})
+        }, state.ticksMilliseconds)
         return () => clearInterval(intervalID)
 
-    }, [state])
+    }, [state,dispatch])
 
-    const totalSeconds = state.mode === ModeType.Working
+    const totalSeconds = state.currentMode === ModeType.Working
         ? state.workMinutes * MINUTE_IN_SECONDS
         : state.breakMinutes * MINUTE_IN_SECONDS
     const percentage = Math.round(state.secondsLeft / totalSeconds * 100)
@@ -60,12 +45,12 @@ const Home = () => {
     return (
         <div className={styles.home}>
             <Head>
-                <title>{isPause ? '⏸️' : ''}{state.mode === ModeType.Working ? '👨‍💻' : '💆'}{text}</title>
+                <title>{isPause ? '⏸️' : ''}{state.currentMode === ModeType.Working ? '👨‍💻' : '💆'}{text}</title>
             </Head>
             <div>
                 <h1>NeuralClocks <div className={styles.tomato}>🍅</div></h1>
                 <div className={styles.timer}>
-                    <ProgressBar styles={{pathColor: state.mode === ModeType.Working ? workingColor : breakColor}}
+                    <ProgressBar styles={{pathColor: state.currentMode === ModeType.Working ? workingColor : breakColor}}
                                  totalTime={percentage}
                                  text={text}/>
                     <div className={styles.buttons}>

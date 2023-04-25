@@ -1,6 +1,6 @@
 import React, {createContext, PropsWithChildren, useReducer, useState} from "react";
 
-enum ModeType {
+export enum ModeType {
     Working = 1,
     Break,
 }
@@ -8,14 +8,19 @@ interface InitialStateType {
     secondsLeft:number;
     breakMinutes: number;
     workMinutes: number;
-    mode: ModeType
+    currentMode: ModeType,
+    fastModeOn:boolean,
+    ticksMilliseconds:number
 }
 
 const initialState = {
     secondsLeft:25*60,
     breakMinutes:5,
     workMinutes:25,
-    mode:ModeType.Working
+    currentMode:ModeType.Working,
+    fastModeOn:false,
+    ticksMilliseconds:1000
+
 }
 export const PomodoroContext = createContext<{
     state: InitialStateType;
@@ -29,12 +34,13 @@ export enum ActionType {
     Tick = 1,
     NextMode,
     SetWorkMinutes,
-    SetBreakMinutes
+    SetBreakMinutes,
+    SetFastMode
 }
 
 type PomodoroActions = {
     type: ActionType;
-    payload?: number;
+    payload?: any;
 }
 const reducer =  (state:InitialStateType, action:PomodoroActions):InitialStateType =>{
     switch (action.type) {
@@ -43,19 +49,20 @@ const reducer =  (state:InitialStateType, action:PomodoroActions):InitialStateTy
         }
         case ActionType.NextMode: {
             let secondsLeft=0;
-            if (action.payload === ModeType.Break){
-                secondsLeft = initialState.breakMinutes * 60
-            }
-            if (action.payload === ModeType.Working){
+            let currentMode:ModeType = initialState.currentMode;
+            if (state.currentMode === ModeType.Break){
+                currentMode = ModeType.Working
                 secondsLeft = initialState.workMinutes * 60
             }
-            return {...state,secondsLeft,mode:action.payload as ModeType}
+            if (state.currentMode === ModeType.Working){
+                currentMode = ModeType.Break
+                secondsLeft = initialState.breakMinutes * 60
+            }
+            return {...state,secondsLeft,currentMode}
         }
-        case ActionType.SetWorkMinutes: {
-            return {...state,workMinutes:action.payload as number}
-        }
-        case ActionType.SetBreakMinutes: {
-            return {...state,breakMinutes:action.payload as number}
+        case ActionType.SetFastMode: {
+            const ticksMilliseconds = action.payload?10:initialState.ticksMilliseconds
+            return {...state,fastModeOn: action.payload as boolean, ticksMilliseconds}
         }
         default: {
             throw new Error(`Unhandled action type: ${action.type}`)
