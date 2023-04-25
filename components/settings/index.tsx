@@ -1,7 +1,8 @@
 import React, {FC, useContext} from "react";
-import {ActionType, PomodoroContext} from "context/state";
+import {PomodoroContext} from "context/state";
 import Switch from "react-switch";
 import styles from "./settings.module.scss"
+import {ActionType} from "@/context/types";
 
 
 const Settings: FC = () => {
@@ -28,6 +29,18 @@ const Settings: FC = () => {
                     value={state.breakMinutes}
                     onChange={(e) => {
                         dispatch({type: ActionType.SetBreakMinutes, payload: parseInt(e.target.value)})
+                    }}
+                />
+            </div>
+            <div>
+                Long Break Minutes
+                <input
+                    type="number"
+                    min={15}
+                    max={30}
+                    value={state.longBreakMinutes}
+                    onChange={(e) => {
+                        dispatch({type: ActionType.SetLongBreakMinutes, payload: parseInt(e.target.value)})
                     }}
                 />
             </div>

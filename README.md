@@ -10,3 +10,4 @@ Welcome to the NeuralClocks Pomodoro!
 - Double tap to Pause/Play for mobile 
 - Improve test
 - Custom 404 page
+- Reset Button

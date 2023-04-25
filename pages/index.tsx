@@ -3,8 +3,9 @@ import Head from 'next/head';
 import ProgressBar from "components/progressbar";
 import Settings from "components/settings";
 import {FC, useContext, useEffect, useRef, useState} from "react";
-import {MINUTE_IN_SECONDS, ModeMap, ModeType, ActionType, PomodoroContext, ModeMapEmoji} from "context/state";
+import {PomodoroContext} from "context/state";
 import {PauseButton, PlayButton, SettingsButton} from "@/components/buttons";
+import {ActionType, MINUTE_IN_SECONDS, ModeMap, ModeMapEmoji, ModeType, TotalSecondsMap} from "@/context/types";
 
 const workingColor = '#EA3368';
 const breakColor = '#4aec8c';
@@ -31,12 +32,7 @@ const Home: FC = () => {
         return () => clearInterval(intervalID)
 
     }, [state, dispatch])
-
-    const totalSeconds = state.currentMode === ModeType.Working
-        ? state.workMinutes * MINUTE_IN_SECONDS
-        : state.breakMinutes * MINUTE_IN_SECONDS
-    const percentage = Math.round(state.secondsLeft / totalSeconds * 100)
-
+    const percentage = Math.round(state.secondsLeft / TotalSecondsMap[state.currentMode] * 100)
     const minutes = Math.floor(state.secondsLeft / MINUTE_IN_SECONDS)
     let seconds = (state.secondsLeft % MINUTE_IN_SECONDS).toString()
     if (parseInt(seconds) < 10) seconds = "0" + seconds
@@ -49,7 +45,7 @@ const Home: FC = () => {
             <div>
                 <h1>NeuralClocks <div className={styles.tomato}>🍅</div></h1>
                 <div className={styles.timer}>
-                    <h2>{ModeMap[state.currentMode]}</h2>
+                    <h2>Pomodoros left {state.pomodoroCount} {ModeMap[state.currentMode]}</h2>
                     <ProgressBar
                         styles={{pathColor: state.currentMode === ModeType.Working ? workingColor : breakColor}}
                         totalTime={percentage}
