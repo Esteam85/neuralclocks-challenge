@@ -52,10 +52,10 @@ const Home: FC = () => {
                         {
                             state.isPause
                                 ? <PlayButton onClick={() => {
-                                    dispatch({type:ActionType.SetPause,payload:false})
+                                    dispatch({type: ActionType.SetPause, payload: false})
                                 }}/>
                                 : <PauseButton onClick={() => {
-                                    dispatch({type:ActionType.SetPause,payload:true})
+                                    dispatch({type: ActionType.SetPause, payload: true})
                                 }}/>
                         }
                         <SettingsButton onClick={() => {

@@ -17,7 +17,9 @@ const Settings: FC = () => {
                     max={25}
                     value={state.workMinutes}
                     onChange={(e) => {
-                        dispatch({type: ActionType.SetWorkMinutes, payload: parseInt(e.target.value)})
+                        const payload = parseInt(e.target.value)
+                        if (isNaN(payload)) return
+                        dispatch({type: ActionType.SetWorkMinutes, payload})
                     }}
                 />
             </div>
@@ -29,7 +31,9 @@ const Settings: FC = () => {
                     max={25}
                     value={state.breakMinutes}
                     onChange={(e) => {
-                        dispatch({type: ActionType.SetBreakMinutes, payload: parseInt(e.target.value)})
+                        const payload = parseInt(e.target.value)
+                        if (isNaN(payload)) return
+                        dispatch({type: ActionType.SetBreakMinutes, payload})
                     }}
                 />
             </div>
@@ -41,7 +45,9 @@ const Settings: FC = () => {
                     max={30}
                     value={state.longBreakMinutes}
                     onChange={(e) => {
-                        dispatch({type: ActionType.SetLongBreakMinutes, payload: parseInt(e.target.value)})
+                        const payload = parseInt(e.target.value)
+                        if (isNaN(payload)) return
+                        dispatch({type: ActionType.SetLongBreakMinutes, payload})
                     }}
                 />
             </div>
