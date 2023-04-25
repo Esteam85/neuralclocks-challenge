@@ -11,7 +11,7 @@ const workingColor = '#EA3368';
 const breakColor = '#4aec8c';
 
 const Home: FC = () => {
-    const {state,dispatch} = useContext(PomodoroContext)
+    const {state, dispatch} = useContext(PomodoroContext)
     const [settings, setSettings] = useState(false)
     const [isPause, setIsPause] = useState(true)
 
@@ -23,15 +23,15 @@ const Home: FC = () => {
             }
 
             if (state.secondsLeft === 0) {
-                dispatch({type:ActionType.NextMode})
-                return
+                dispatch({type: ActionType.NextMode})
+                return;
             }
 
-            dispatch({type:ActionType.Tick})
+            dispatch({type: ActionType.Tick})
         }, state.ticksMilliseconds)
         return () => clearInterval(intervalID)
 
-    }, [state,dispatch])
+    }, [state, dispatch])
 
     const totalSeconds = state.currentMode === ModeType.Working
         ? state.workMinutes * MINUTE_IN_SECONDS
@@ -51,9 +51,10 @@ const Home: FC = () => {
                 <h1>NeuralClocks <div className={styles.tomato}>🍅</div></h1>
                 <div className={styles.timer}>
                     <h2>{ModeMap[state.currentMode]}</h2>
-                    <ProgressBar styles={{pathColor: state.currentMode === ModeType.Working ? workingColor : breakColor}}
-                                 totalTime={percentage}
-                                 text={text}/>
+                    <ProgressBar
+                        styles={{pathColor: state.currentMode === ModeType.Working ? workingColor : breakColor}}
+                        totalTime={percentage}
+                        text={text}/>
                     <div className={styles.buttons}>
                         {
                             isPause

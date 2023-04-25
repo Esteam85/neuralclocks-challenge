@@ -59,7 +59,7 @@ const reducer = (state: InitialStateType, action: PomodoroActions): InitialState
             return {...state, secondsLeft: state.secondsLeft - 1}
         }
         case ActionType.NextMode: {
-            let secondsLeft = 0;
+            let secondsLeft = initialState.secondsLeft;
             let currentMode: ModeType = initialState.currentMode;
             if (state.currentMode === ModeType.Break) {
                 currentMode = ModeType.Working
@@ -74,6 +74,14 @@ const reducer = (state: InitialStateType, action: PomodoroActions): InitialState
         case ActionType.SetFastMode: {
             const ticksMilliseconds = action.payload ? 10 : initialState.ticksMilliseconds
             return {...state, fastModeOn: action.payload as boolean, ticksMilliseconds}
+        }
+        case ActionType.SetBreakMinutes: {
+            const secondsLeft = action.payload * 60
+            return {...state, secondsLeft, breakMinutes: action.payload as number}
+        }
+        case ActionType.SetWorkMinutes: {
+            const secondsLeft = action.payload * 60
+            return {...state, secondsLeft, workMinutes: action.payload as number}
         }
         default: {
             throw new Error(`Unhandled action type: ${action.type}`)
