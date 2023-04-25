@@ -13,12 +13,10 @@ const breakColor = '#4aec8c';
 const Home: FC = () => {
     const {state, dispatch} = useContext(PomodoroContext)
     const [settings, setSettings] = useState(false)
-    const [isPause, setIsPause] = useState(true)
 
-    const isPauseRef = useRef(isPause)
     useEffect(() => {
         const intervalID = setInterval(() => {
-            if (isPauseRef.current) {
+            if (state.isPause) {
                 return;
             }
 
@@ -40,7 +38,7 @@ const Home: FC = () => {
     return (
         <div className={styles.home}>
             <Head>
-                <title>{isPause ? '⏸️' : ''}{ModeMapEmoji[state.currentMode]}{text}</title>
+                <title>{state.isPause ? '⏸️' : ''}{ModeMapEmoji[state.currentMode]}{text}</title>
             </Head>
             <div>
                 <h1>NeuralClocks <div className={styles.tomato}>🍅</div></h1>
@@ -52,14 +50,12 @@ const Home: FC = () => {
                         text={text}/>
                     <div className={styles.buttons}>
                         {
-                            isPause
+                            state.isPause
                                 ? <PlayButton onClick={() => {
-                                    setIsPause(false)
-                                    isPauseRef.current = false
+                                    dispatch({type:ActionType.SetPause,payload:false})
                                 }}/>
                                 : <PauseButton onClick={() => {
-                                    setIsPause(true)
-                                    isPauseRef.current = true
+                                    dispatch({type:ActionType.SetPause,payload:true})
                                 }}/>
                         }
                         <SettingsButton onClick={() => {

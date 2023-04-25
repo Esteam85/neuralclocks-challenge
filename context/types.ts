@@ -29,6 +29,7 @@ export interface InitialStateType {
     ticksMilliseconds: number;
     pomodoroCount: number;
     totalSeconds: number;
+    isPause:boolean;
 }
 
 export const initialState = {
@@ -40,7 +41,8 @@ export const initialState = {
     fastModeOn: false,
     ticksMilliseconds: 1000,
     pomodoroCount: 4,
-    totalSeconds: 25 * MINUTE_IN_SECONDS
+    totalSeconds: 25 * MINUTE_IN_SECONDS,
+    isPause:true
 }
 
 export let TotalSecondsMap: Record<ModeType,number> = {
@@ -56,7 +58,9 @@ export enum ActionType {
     SetWorkMinutes,
     SetBreakMinutes,
     SetLongBreakMinutes,
-    SetFastMode
+    SetFastMode,
+    SetPause,
+    Reset
 }
 
 export type PomodoroActions = {

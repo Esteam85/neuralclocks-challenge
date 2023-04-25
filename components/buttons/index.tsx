@@ -1,6 +1,6 @@
 import React, {FC} from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faCirclePause, faCirclePlay, faGear} from "@fortawesome/free-solid-svg-icons";
+import {faBomb, faCirclePause, faCirclePlay, faGear} from "@fortawesome/free-solid-svg-icons";
 import styled from "./buttons.module.scss"
 
 interface ButtonProps {
@@ -14,7 +14,7 @@ interface ButtonProps {
 
 export const PauseButton: FC<ButtonProps> = (props) => {
     return (
-        <button role={"pause-button"} className={styled.playpause} {...props}>
+        <button role={"pause-button"} title={"Pause"} className={styled.playpause} {...props}>
             <FontAwesomeIcon icon={faCirclePause}/>
         </button>
     )
@@ -22,7 +22,7 @@ export const PauseButton: FC<ButtonProps> = (props) => {
 
 export const PlayButton: FC<ButtonProps> = (props) => {
 
-    return (<button role={"play-button"} className={styled.playpause} {...props}>
+    return (<button role={"play-button"} title={"Play"} className={styled.playpause} {...props}>
             <FontAwesomeIcon icon={faCirclePlay} />
         </button>
     );
@@ -30,7 +30,13 @@ export const PlayButton: FC<ButtonProps> = (props) => {
 
 export const SettingsButton: FC<ButtonProps> = ({onClick}) => {
     return (
-        <button role={"settings-button"} className={styled.settings} onClick={onClick}>
+        <button role={"settings-button"} title={"Settings"} className={styled.settings} onClick={onClick}>
             <FontAwesomeIcon icon={faGear}/>
+        </button>);
+}
+export const ResetButton: FC<ButtonProps> = ({onClick}) => {
+    return (
+        <button role={"reset-button"} title={"Reset"} className={styled.playpause} onClick={onClick}>
+            <FontAwesomeIcon icon={faBomb}/>
         </button>);
 }

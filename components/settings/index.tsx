@@ -3,6 +3,7 @@ import {PomodoroContext} from "context/state";
 import Switch from "react-switch";
 import styles from "./settings.module.scss"
 import {ActionType} from "@/context/types";
+import {ResetButton} from "@/components/buttons";
 
 
 const Settings: FC = () => {
@@ -63,6 +64,11 @@ const Settings: FC = () => {
                         dispatch({type: ActionType.SetFastMode, payload: !state.fastModeOn})
                     }} checked={state.fastModeOn}/>
                 </div>
+            </div>
+            <div>
+                <ResetButton onClick={() => {
+                    dispatch({type:ActionType.Reset})
+                }} />
             </div>
         </div>
     )

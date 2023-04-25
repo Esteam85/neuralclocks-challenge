@@ -70,6 +70,15 @@ const reducer = (state: InitialStateType, action: PomodoroActions): InitialState
             TotalSecondsMap[ModeType.LongBreak] = payloadInSecs
             return {...state, secondsLeft, longBreakMinutes: action.payload as number}
         }
+        case ActionType.SetPause: {
+            return {...state, isPause: action.payload as boolean}
+        }
+        case ActionType.Reset: {
+            TotalSecondsMap[ModeType.Working] = initialState.workMinutes * MINUTE_IN_SECONDS
+            TotalSecondsMap[ModeType.Break] = initialState.breakMinutes * MINUTE_IN_SECONDS
+            TotalSecondsMap[ModeType.LongBreak] = initialState.longBreakMinutes * MINUTE_IN_SECONDS
+            return {...state, ...initialState}
+        }
         default: {
             throw new Error(`Unhandled action type: ${action.type}`)
         }
