@@ -3,7 +3,7 @@
 
 Welcome to the NeuralClocks Pomodoro!
 
-[Go to NeuralCloks Pomodoro](https://pomodoro.esteam85.com)
+[Go to NeuralClocks Pomodoro](https://pomodoro.esteam85.com)
 ## Developed with
 - Nextjs + Typescript
 - useReducer
