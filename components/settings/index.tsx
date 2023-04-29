@@ -2,7 +2,7 @@ import React, {FC, useContext} from "react";
 import {PomodoroContext} from "context/state";
 import Switch from "react-switch";
 import styles from "./settings.module.scss"
-import {ActionType} from "@/context/types";
+import {ActionType, DEFAULT_BREAK_MINUTES, DEFAULT_LONG_BREAK_MINUTES, DEFAULT_WORKING_MINUTES} from "@/context/types";
 import {ResetButton} from "@/components/buttons";
 
 
@@ -13,8 +13,7 @@ const Settings: FC = () => {
             <div>Work Minutes
                 <input
                     type="number"
-                    min={15}
-                    max={25}
+                    min={DEFAULT_WORKING_MINUTES}
                     value={state.workMinutes}
                     onChange={(e) => {
                         const payload = parseInt(e.target.value)
@@ -27,8 +26,7 @@ const Settings: FC = () => {
                 Break Minutes
                 <input
                     type="number"
-                    min={5}
-                    max={25}
+                    min={DEFAULT_BREAK_MINUTES}
                     value={state.breakMinutes}
                     onChange={(e) => {
                         const payload = parseInt(e.target.value)
@@ -41,8 +39,7 @@ const Settings: FC = () => {
                 Long Break Minutes
                 <input
                     type="number"
-                    min={15}
-                    max={30}
+                    min={DEFAULT_LONG_BREAK_MINUTES}
                     value={state.longBreakMinutes}
                     onChange={(e) => {
                         const payload = parseInt(e.target.value)
@@ -66,15 +63,15 @@ const Settings: FC = () => {
                         height={20}
                         width={48}
                         className="react-switch"
-                        onColor={"#EA3368"} onChange={(e) => {
+                        onColor={"#EA3368"} onChange={() => {
                         dispatch({type: ActionType.SetFastMode, payload: !state.fastModeOn})
                     }} checked={state.fastModeOn}/>
                 </div>
             </div>
             <div>
                 <ResetButton onClick={() => {
-                    dispatch({type:ActionType.Reset})
-                }} />
+                    dispatch({type: ActionType.Reset})
+                }}/>
             </div>
         </div>
     )

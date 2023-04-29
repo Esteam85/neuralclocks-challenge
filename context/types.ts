@@ -1,4 +1,8 @@
-
+export const DEFAULT_WORKING_MINUTES = 25;
+export const DEFAULT_BREAK_MINUTES = 5;
+export const DEFAULT_TICKS_MILLISECONDS = 1000;
+export const POMODORO_COUNT = 4;
+export const DEFAULT_LONG_BREAK_MINUTES = 15;
 export const MINUTE_IN_SECONDS = 60
 
 export enum ModeType {
@@ -7,17 +11,17 @@ export enum ModeType {
     LongBreak
 }
 
-export const ModeMapEmoji: Record<ModeType, string> = {
+export const ModeMapEmoji: Record<ModeType, string> = Object.freeze({
     [ModeType.Working]: "👨‍💻",
     [ModeType.Break]: "💆",
     [ModeType.LongBreak]: "🏖️"
-}
+})
 
-export const ModeMap: Record<ModeType, string> = {
+export const ModeMap: Record<ModeType, string> = Object.freeze({
     [ModeType.Working]: "👨‍💻Working",
     [ModeType.Break]: "💆Short Break",
     [ModeType.LongBreak]: "🏖Long Break",
-}
+})
 
 export interface InitialStateType {
     secondsLeft: number;
@@ -29,23 +33,23 @@ export interface InitialStateType {
     ticksMilliseconds: number;
     pomodoroCount: number;
     totalSeconds: number;
-    isPause:boolean;
+    isPause: boolean;
 }
 
 export const initialState = {
-    secondsLeft: 25 * MINUTE_IN_SECONDS,
-    breakMinutes: 5,
-    longBreakMinutes: 15,
-    workMinutes: 25,
+    secondsLeft: DEFAULT_WORKING_MINUTES * MINUTE_IN_SECONDS,
+    breakMinutes: DEFAULT_BREAK_MINUTES,
+    longBreakMinutes: DEFAULT_LONG_BREAK_MINUTES,
+    workMinutes: DEFAULT_WORKING_MINUTES,
     currentMode: ModeType.Working,
     fastModeOn: false,
-    ticksMilliseconds: 1000,
-    pomodoroCount: 4,
-    totalSeconds: 25 * MINUTE_IN_SECONDS,
-    isPause:true
+    ticksMilliseconds: DEFAULT_TICKS_MILLISECONDS,
+    pomodoroCount: POMODORO_COUNT,
+    totalSeconds: DEFAULT_WORKING_MINUTES * MINUTE_IN_SECONDS,
+    isPause: true
 }
 
-export let TotalSecondsMap: Record<ModeType,number> = {
+export let TotalSecondsMap: Record<ModeType, number> = {
     [ModeType.Working]: initialState.workMinutes * MINUTE_IN_SECONDS,
     [ModeType.Break]: initialState.breakMinutes * MINUTE_IN_SECONDS,
     [ModeType.LongBreak]: initialState.longBreakMinutes * MINUTE_IN_SECONDS,

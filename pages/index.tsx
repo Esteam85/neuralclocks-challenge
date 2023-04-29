@@ -2,7 +2,7 @@ import styles from "./home.module.scss"
 import Head from 'next/head';
 import ProgressBar from "components/progressbar";
 import Settings from "components/settings";
-import {FC, useContext, useEffect, useRef, useState} from "react";
+import {FC, useContext, useEffect, useState} from "react";
 import {PomodoroContext} from "context/state";
 import {PauseButton, PlayButton, SettingsButton} from "@/components/buttons";
 import {ActionType, MINUTE_IN_SECONDS, ModeMap, ModeMapEmoji, ModeType, TotalSecondsMap} from "@/context/types";
@@ -34,11 +34,12 @@ const Home: FC = () => {
     const minutes = Math.floor(state.secondsLeft / MINUTE_IN_SECONDS)
     let seconds = (state.secondsLeft % MINUTE_IN_SECONDS).toString()
     if (parseInt(seconds) < 10) seconds = "0" + seconds
-    const text = `${minutes}:${seconds}`
+    const timeText = `${minutes}:${seconds}`
+    const title=`${timeText}${state.isPause ? '⏸️' : ''}${ModeMapEmoji[state.currentMode]}`
     return (
         <div className={styles.home}>
             <Head>
-                <title>{state.isPause ? '⏸️' : ''}{ModeMapEmoji[state.currentMode]}{text}</title>
+                <title>{title}</title>
             </Head>
             <div>
                 <h1>NeuralClocks <div className={styles.tomato}>🍅</div></h1>
@@ -47,7 +48,7 @@ const Home: FC = () => {
                     <ProgressBar
                         styles={{pathColor: state.currentMode === ModeType.Working ? workingColor : breakColor}}
                         totalTime={percentage}
-                        text={text}/>
+                        text={timeText}/>
                     <div className={styles.buttons}>
                         {
                             state.isPause
