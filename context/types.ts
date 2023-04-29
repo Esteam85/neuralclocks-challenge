@@ -4,6 +4,7 @@ export const DEFAULT_TICKS_MILLISECONDS = 1000;
 export const POMODORO_COUNT = 4;
 export const DEFAULT_LONG_BREAK_MINUTES = 15;
 export const MINUTE_IN_SECONDS = 60
+export const FAST_MODE_MILLISECONDS = 10
 
 export enum ModeType {
     Working = 1,

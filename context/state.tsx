@@ -1,6 +1,6 @@
 import React, {createContext, PropsWithChildren, useReducer, useState} from "react";
 import {
-    ActionType,
+    ActionType, FAST_MODE_MILLISECONDS,
     initialState,
     InitialStateType,
     MINUTE_IN_SECONDS,
@@ -43,7 +43,7 @@ const reducer = (state: InitialStateType, action: PomodoroActions): InitialState
             return state
         }
         case ActionType.SetFastMode: {
-            const ticksMilliseconds = action.payload ? 10 : initialState.ticksMilliseconds
+            const ticksMilliseconds = action.payload ? FAST_MODE_MILLISECONDS : initialState.ticksMilliseconds
             return {...state, fastModeOn: action.payload as boolean, ticksMilliseconds}
         }
         case ActionType.SetBreakMinutes: {
