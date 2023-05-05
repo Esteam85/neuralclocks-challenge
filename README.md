@@ -1,9 +1,9 @@
-# NeuralClocks Pomodoro Challenge
-[![CI](https://github.com/Esteam85/neuralclocks-challenge/actions/workflows/main.yml/badge.svg)](https://github.com/Esteam85/neuralclocks-challenge/actions/workflows/main.yml)
+# Estem Pomodoro
+[![CI](https://github.com/Esteam85/esteam-pomodoro/actions/workflows/main.yml/badge.svg)](https://github.com/Esteam85/esteam-pomodoro/actions/workflows/main.yml)
 
-Welcome to the NeuralClocks Pomodoro!
+Welcome to the Esteam Pomodoro!
 
-[Go to NeuralClocks Pomodoro](https://pomodoro.esteam85.com)
+[Go to Esteam Pomodoro](https://pomodoro.esteam85.com)
 ## Developed with
 - Nextjs + Typescript
 - useReducer
