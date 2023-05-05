@@ -3,9 +3,9 @@ import {render, screen} from "@testing-library/react";
 import {PomodoroProvider} from "@/context/state";
 
 describe('Home component', () => {
-    it('should render the "NeuralClocks" title', () => {
+    it('should render the "Esteam Pomodoro" title', () => {
         render(<Home/>)
-        const home = screen.getByText(/NeuralClocks/i)
+        const home = screen.getByText(/Esteam Pomodoro/i)
         expect(home).toBeInTheDocument()
     })
 

@@ -47,4 +47,4 @@ jobs:
         with:
           vercel-token: ${{ secrets.VERCEL_SECRET }}
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
-          vercel-project-id: neuralclocks-challenge
+          vercel-project-id: esteam-pomodoro

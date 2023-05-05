@@ -42,7 +42,7 @@ const Home: FC = () => {
                 <title>{title}</title>
             </Head>
             <div>
-                <h1>NeuralClocks <div className={styles.tomato}>🍅</div></h1>
+                <h1>Esteam Pomodoro <div className={styles.tomato}>🍅</div></h1>
                 <div className={styles.timer}>
                     <h2>Pomodoros left {state.pomodoroCount} {ModeMap[state.currentMode]}</h2>
                     <ProgressBar
