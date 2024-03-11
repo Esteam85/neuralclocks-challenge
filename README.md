@@ -1,10 +1,13 @@
 # Estem Pomodoro
+
 [![CI](https://github.com/Esteam85/esteam-pomodoro/actions/workflows/main.yml/badge.svg)](https://github.com/Esteam85/esteam-pomodoro/actions/workflows/main.yml)
 
 Welcome to the Esteam Pomodoro!
 
-[Go to Esteam Pomodoro](https://pomodoro.esteam85.com)
+[Go to Esteam Pomodoro](https://esteam85.com/pomodoro)
+
 ## Developed with
+
 - Nextjs + Typescript
 - useReducer
 - GitHub Actions (CI)
@@ -15,7 +18,6 @@ Welcome to the Esteam Pomodoro!
 - Eslint
 - FontAwesome
 
-
 ## Improvements
 
 - Save configs
@@ -23,6 +25,6 @@ Welcome to the Esteam Pomodoro!
 - Press space to pause/play
 - Use a server-side ticker because when the user's computer goes to sleep, the browser pauses the interval
 - Responsive design view
-- Double tap to Pause/Play for mobile 
+- Double tap to Pause/Play for mobile
 - Improve test
 - Custom 404 page
