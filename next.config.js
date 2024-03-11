@@ -3,7 +3,7 @@ const path = require("path");
 
 const nextConfig = {
   reactStrictMode: true,
-  basePath: "/pomodoro",
+  assetPrefix: "/pomodoro",
   sassOptions: {
     includePaths: [path.join(__dirname, "styles")],
   },
