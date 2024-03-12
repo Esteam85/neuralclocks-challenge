@@ -28,3 +28,4 @@ Welcome to the Esteam Pomodoro!
 - Double tap to Pause/Play for mobile
 - Improve test
 - Custom 404 page
+- Sound after cycle finish
